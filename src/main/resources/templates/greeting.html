@@ -1,10 +1,39 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
-<head> 
-    <title>Getting Started: Serving Web Content</title> 
+<head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 <body>
-    <p th:text="'Hello, ' + ${name} + '!'" />
+	<p th:text="'the temp file path : ' + ${file_path} " />
+	
+    <p>
+    	<a href="/receives">訂單</a>
+    	<a href="/customers">客戶</a>
+    	<a href="/products">產品</a>
+    </p>
+    
+    <form method="POST" action="/upload" enctype="multipart/form-data">
+    <input type="file" name="file" /><br/>
+    <input type="submit" value="Submit" />
+	</form>
+	
+	<p>find By Customer Name</p>
+	<form method="POST" action="/findByCustomerName" enctype="multipart/form-data">
+    <input type="text" name="customerName" />
+    <input type="submit" value="Submit" />
+	</form>
+	
+	<p>find By Customer Phone Number</p>
+	<form method="POST" action="/findByCustomerPhoneNumber" enctype="multipart/form-data">
+    <input type="text" name="customerPhoneNumber" />
+    <input type="submit" value="Submit" />
+	</form>
+	
+	<p>find By Prod</p>
+	<form method="POST" action="/findByProd" enctype="multipart/form-data">
+    <input type="text" name="prodName" />
+    <input type="submit" value="Submit" />
+	</form>
+	
 </body>
 </html>

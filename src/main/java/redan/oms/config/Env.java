@@ -9,6 +9,15 @@ import redan.oms.FileUploadService;
 @Configuration
 public class Env {
 	
+	public class RedanConfig{
+		public static final String filePath = "C://temp//";
+	}
+	
+	@Bean
+	public RedanConfig redanConfig() {
+		return new RedanConfig();
+	};
+	
 	@Bean
 	public FileUploadService fileUploadService() {
 		return new FileUploadService();

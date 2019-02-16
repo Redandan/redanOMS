@@ -34,6 +34,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import redan.oms.config.Env.RedanConfig;
 import redan.oms.entity.Customer;
 import redan.oms.entity.Product;
 import redan.oms.entity.Receive;
@@ -42,7 +43,12 @@ import redan.oms.repository.ProductRepository;
 import redan.oms.repository.ReceiveRepository;
 
 @RestController
-public class FileUploadController {
+public class FileOperationController {
+
+	@Autowired
+	RedanConfig redanConfig;
+	
+	String filePath = redanConfig.filePath;
 
 	@Autowired
 	FileUploadService uploadService;
@@ -56,20 +62,12 @@ public class FileUploadController {
 	@Autowired
 	ReceiveRepository receiveRepository;
 
-	@GetMapping("/greeting")
-	public String greeting(@RequestParam(name = "name", required = false, defaultValue = "World") String name,
-			Model model) {
-		model.addAttribute("name", name);
-		return "greeting";
-	}
-
 	@RequestMapping(value = "/upload", method = RequestMethod.POST)
 	public String singleFileUpload(@RequestParam("file") MultipartFile file, RedirectAttributes redirectAttributes) {
 
 		try {
-			// Get the file and save it somewhere
 			byte[] bytes = file.getBytes();
-			Path path = Paths.get("C://temp//" + file.getOriginalFilename());
+			Path path = Paths.get(filePath + file.getOriginalFilename());
 			Files.write(path, bytes);
 			uploadService.uploadFileData("C://temp//" + path.getFileName());
 			redirectAttributes.addFlashAttribute("message",
@@ -80,12 +78,11 @@ public class FileUploadController {
 					"Failure occured during upload '" + file.getOriginalFilename() + "'");
 			e.printStackTrace();
 		}
-
 		return "done";
 	}
 
 	private FileSystemResource downloadFile(List<Receive> outPutReces) {
-		final String FILE_NAME = "C://temp//outputtemp.xlsx";
+		final String FILE_NAME = filePath + "outputtemp.xlsx";
 		XSSFWorkbook workbook = new XSSFWorkbook();
 		XSSFSheet sheet = workbook.createSheet("output sheet");
 		int rowNum = 0;
@@ -101,14 +98,12 @@ public class FileUploadController {
 			buyerPhone.setCellValue(receive.getBuyer().getPhone());
 			Cell buyeraddr = row.createCell(3);
 			buyeraddr.setCellValue(receive.getBuyer().getAddress());
-			
+
 			int colnum = 4;
 			for (Product prods : receive.getProds()) {
 				Cell cell = row.createCell(colnum++);
 				cell.setCellValue(prods.getName());
 			}
-			
-			
 
 		}
 
@@ -121,35 +116,36 @@ public class FileUploadController {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		 return new FileSystemResource(new File(FILE_NAME)); 
+		return new FileSystemResource(new File(FILE_NAME));
 
 	}
 
-	@RequestMapping(value = "/findByCustomerName", method = RequestMethod.POST ,produces = MediaType.APPLICATION_OCTET_STREAM_VALUE )
+	@RequestMapping(value = "/findByCustomerName", method = RequestMethod.POST, produces = MediaType.APPLICATION_OCTET_STREAM_VALUE)
 	public FileSystemResource findByCustomerName(@RequestParam("customerName") String customerName) {
 		List<Customer> customerList = customerRepository.findByName(customerName);
 		System.out.println(customerName);
 		customerList.forEach(System.out::println);
-		
+
 		return downloadFile(receiveRepository.findByBuyer(customerList.get(0)));
 	}
 
-	@RequestMapping(value = "/findByCustomerPhoneNumber", method = RequestMethod.POST ,produces = MediaType.APPLICATION_OCTET_STREAM_VALUE )
-	public FileSystemResource findByCustomerPhoneNumber(@RequestParam("customerPhoneNumber") String customerPhoneNumber) {
+	@RequestMapping(value = "/findByCustomerPhoneNumber", method = RequestMethod.POST, produces = MediaType.APPLICATION_OCTET_STREAM_VALUE)
+	public FileSystemResource findByCustomerPhoneNumber(
+			@RequestParam("customerPhoneNumber") String customerPhoneNumber) {
 		List<Customer> customerList = customerRepository.findByPhone(customerPhoneNumber);
 		System.out.println(customerPhoneNumber);
 		customerList.forEach(System.out::println);
-		
+
 		return downloadFile(receiveRepository.findByBuyer(customerList.get(0)));
 	}
 
-	@RequestMapping(value = "/findByProd", method = RequestMethod.POST ,produces = MediaType.APPLICATION_OCTET_STREAM_VALUE )
+	@RequestMapping(value = "/findByProd", method = RequestMethod.POST, produces = MediaType.APPLICATION_OCTET_STREAM_VALUE)
 	@ResponseBody
 	public FileSystemResource findByProd(@RequestParam("prodName") String prodName) {
 		List<Product> prodList = productRepository.findByName(prodName);
 		System.out.println(prodName);
 		prodList.forEach(System.out::println);
-		
+
 		return downloadFile(receiveRepository.findByProds(prodList.get(0)));
 	}
 }
