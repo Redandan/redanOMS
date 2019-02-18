@@ -3,6 +3,8 @@ package redan.oms;
 import javax.sql.DataSource;
 
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
+
+
 /**
  * Abstract class BaseDAO
  */
@@ -10,7 +12,7 @@ public abstract class BaseDAO {
 	private DataSource dataSource = null;
 	private NamedParameterJdbcTemplate namedParamJdbcTemplate = null;
 
-	public DataSource getDataSource() {
+	public DataSource getDataSource() {		
 		return dataSource;
 	}
 
