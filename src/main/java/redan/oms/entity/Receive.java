@@ -1,5 +1,6 @@
 package redan.oms.entity;
 
+import java.util.Date;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -32,7 +33,10 @@ public class Receive {
 	@Column
 	private String specification2;	
 	@Column
-	private Integer ReceAmount;	
+	private Integer receAmount;
+	@Column
+	private Date orderDate;
+	
 	@ManyToMany
 	private Set<Product> prods;
 	@ManyToOne
@@ -70,10 +74,10 @@ public class Receive {
 		this.origId = origId;
 	}
 	public Integer getReceAmount() {
-		return ReceAmount;
+		return receAmount;
 	}
 	public void setReceAmount(Integer receAmount) {
-		ReceAmount = receAmount;
+		this.receAmount = receAmount;
 	}
 	public Set<Product> getProds() {
 		return prods;
@@ -87,10 +91,17 @@ public class Receive {
 	public void setBuyer(Customer buyer) {
 		this.buyer = buyer;
 	}
+	
+	public Date getOrderDate() {
+		return orderDate;
+	}
+	public void setOrderDate(Date orderDate) {
+		this.orderDate = orderDate;
+	}
 	@Override
 	public String toString() {
 		return "Receive [id=" + id + ", origId=" + origId + ", logistics=" + logistics + ", specification1="
-				+ specification1 + ", specification2=" + specification2 + ", ReceAmount=" + ReceAmount + ", prods="
+				+ specification1 + ", specification2=" + specification2 + ", receAmount=" + receAmount + ", prods="
 				+ prods + ", buyer=" + buyer + "]";
 	}
 

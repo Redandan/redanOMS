@@ -1,5 +1,6 @@
 package redan.oms.repository;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -15,4 +16,5 @@ public interface ReceiveRepository extends JpaRepository<Receive, Long> {
 	List<Receive> findByOrigId(Long origId);
 	List<Receive> findByBuyer(Customer buyer);
 	List<Receive> findByProds(Product prods);
+	List<Receive> findByOrderDateBetween(Date starDate,Date endDate);
 }

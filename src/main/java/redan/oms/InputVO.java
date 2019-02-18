@@ -11,6 +11,7 @@ public class InputVO {
 	private String receAmount;
 	private String logistics;
 	private String customerAddress;
+	private String orderDate;
 	public String getReceiveId() {
 		return receiveId;
 	}
@@ -64,6 +65,13 @@ public class InputVO {
 	}
 	public void setCustomerAddress(String customerAddress) {
 		this.customerAddress = customerAddress;
+	}
+	
+	public String getOrderDate() {
+		return orderDate;
+	}
+	public void setOrderDate(String orderDate) {
+		this.orderDate = orderDate;
 	}
 	@Override
 	public String toString() {

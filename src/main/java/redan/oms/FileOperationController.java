@@ -8,6 +8,7 @@ import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Date;
 import java.util.List;
 import java.util.Set;
 
@@ -20,6 +21,7 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.core.io.FileSystemResource;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -147,5 +149,17 @@ public class FileOperationController {
 		prodList.forEach(System.out::println);
 
 		return downloadFile(receiveRepository.findByProds(prodList.get(0)));
+	}
+	@RequestMapping(value = "/findByDateBetween", method = RequestMethod.POST, produces = MediaType.APPLICATION_OCTET_STREAM_VALUE)
+	@ResponseBody
+	public FileSystemResource findByDateBetween(
+			@RequestParam("startDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date startDate,
+			@RequestParam("endDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date endDate) {
+		
+		System.out.println(startDate);
+		System.out.println(endDate);		
+
+		return downloadFile(receiveRepository.findByOrderDateBetween(startDate, endDate));
+		
 	}
 }
