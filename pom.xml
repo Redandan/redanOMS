@@ -36,6 +36,10 @@
 			<artifactId>spring-boot-starter-data-jpa</artifactId>
 		</dependency>
 		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-security</artifactId>
+		</dependency>
+		<dependency>
 			<groupId>com.h2database</groupId>
 			<artifactId>h2</artifactId>
 		</dependency>
@@ -92,31 +96,9 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
-		</plugins>
-		<extensions>
-			<extension>
-				<groupId>org.kuali.maven.wagons</groupId>
-				<artifactId>maven-s3-wagon</artifactId>
-				<version>1.2.1</version>
-			</extension>
-		</extensions>
+		</plugins>		
 	</build>
 
-	<distributionManagement>
-		<snapshotRepository>
-			<id>redan.repo.io</id>
-			<url>s3://redan.repo.io/snapshot</url>
-		</snapshotRepository>
-		<repository>
-			<id>redan.repo.io</id>
-			<url>s3://redan.repo.io/release</url>
-		</repository>
-	</distributionManagement>
-	<repositories>
-		<repository>
-			<id>redan.repo.io</id>
-			<url>s3://redan.repo.io/release</url>
-		</repository>
-	</repositories>
+	
 
 </project>
