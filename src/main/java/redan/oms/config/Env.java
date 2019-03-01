@@ -10,7 +10,8 @@ import redan.oms.FileUploadService;
 public class Env {
 	
 	public class RedanConfig{
-		public static final String filePath = "C://temp//";
+//		public static final String filePath = "C://temp//";
+		public static final String filePath = "/tmp";
 	}
 	
 	@Bean

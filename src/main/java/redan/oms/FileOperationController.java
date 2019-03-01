@@ -71,7 +71,7 @@ public class FileOperationController {
 			byte[] bytes = file.getBytes();
 			Path path = Paths.get(filePath + file.getOriginalFilename());
 			Files.write(path, bytes);
-			uploadService.uploadFileData("C://temp//" + path.getFileName());
+			uploadService.uploadFileData(filePath + path.getFileName());
 			redirectAttributes.addFlashAttribute("message",
 					"You successfully uploaded '" + file.getOriginalFilename() + "'");
 
