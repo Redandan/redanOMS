@@ -88,8 +88,8 @@ public class FileOperationController {
 	public String listFile() {
 		String res = "nogood";
 		try {
-			Stream<Path> fileList = Files.list(Paths.get("."));
-			res = fileList.toString();
+			Stream<Path> fileList = Files.list(Paths.get("."));			
+			res = fileList.toArray().toString();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
