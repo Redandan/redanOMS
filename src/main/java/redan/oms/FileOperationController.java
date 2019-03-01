@@ -11,6 +11,7 @@ import java.nio.file.Paths;
 import java.util.Date;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Stream;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -49,7 +50,7 @@ public class FileOperationController {
 
 	@Autowired
 	RedanConfig redanConfig;
-	
+
 	String filePath = redanConfig.filePath;
 
 	@Autowired
@@ -81,6 +82,19 @@ public class FileOperationController {
 			e.printStackTrace();
 		}
 		return "done";
+	}
+
+	@RequestMapping(value = "/listFile", method = RequestMethod.GET)
+	public String listFile() {
+		String res = "nogood";
+		try {
+			Stream<Path> fileList = Files.list(Paths.get("."));
+			res = fileList.toString();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return res;
 	}
 
 	private FileSystemResource downloadFile(List<Receive> outPutReces) {
@@ -150,16 +164,17 @@ public class FileOperationController {
 
 		return downloadFile(receiveRepository.findByProds(prodList.get(0)));
 	}
+
 	@RequestMapping(value = "/findByDateBetween", method = RequestMethod.POST, produces = MediaType.APPLICATION_OCTET_STREAM_VALUE)
 	@ResponseBody
 	public FileSystemResource findByDateBetween(
 			@RequestParam("startDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date startDate,
 			@RequestParam("endDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date endDate) {
-		
+
 		System.out.println(startDate);
-		System.out.println(endDate);		
+		System.out.println(endDate);
 
 		return downloadFile(receiveRepository.findByOrderDateBetween(startDate, endDate));
-		
+
 	}
 }
