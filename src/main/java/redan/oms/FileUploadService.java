@@ -32,7 +32,8 @@ public class FileUploadService {
 				System.out.println("SheetName:"+sheet.getSheetName());
 				
 				/*Build the header portion of the Output File*/
-				String headerDetails= "ReceiveId,"
+				String headerDetails= "OrderDate," 
+									+ "ReceiveId,"
 									+ "CustomerName,"
 									+ "CustomerPhone,"
 									+ "ProdName,"
@@ -40,7 +41,8 @@ public class FileUploadService {
 									+ "ReceSpic2,"
 									+ "ReceAmount,"
 									+ "Logistics,"
-									+ "CustomerAddress";
+									+ "CustomerAddress"
+									+ "ActivateName";
 				String headerNames[] = headerDetails.split(",");
 				 
 				 /*Read and process each Row*/

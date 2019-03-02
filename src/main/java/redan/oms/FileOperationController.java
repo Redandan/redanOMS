@@ -186,6 +186,8 @@ public class FileOperationController {
 	@RequestMapping(value = "/deleteAll", method = RequestMethod.GET)	
 	public String deleteAll() {
 		receiveRepository.deleteAll();
+		productRepository.deleteAll();
+		customerRepository.deleteAll();
 		return "done";
 
 	}

@@ -35,7 +35,9 @@ public class Receive {
 	@Column
 	private Integer receAmount;
 	@Column
-	private Date orderDate;
+	private Date orderDate;	
+	@Column
+	private String activateName;
 	
 	@ManyToMany
 	private Set<Product> prods;
@@ -97,6 +99,14 @@ public class Receive {
 	}
 	public void setOrderDate(Date orderDate) {
 		this.orderDate = orderDate;
+	}
+	
+	
+	public String getActivateName() {
+		return activateName;
+	}
+	public void setActivateName(String activateName) {
+		this.activateName = activateName;
 	}
 	@Override
 	public String toString() {
