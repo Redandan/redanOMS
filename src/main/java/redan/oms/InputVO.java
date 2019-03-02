@@ -10,6 +10,7 @@ public class InputVO {
 	private String receSpic2;
 	private String receAmount;
 	private String logistics;
+	private String trackingNumber;
 	private String customerAddress;
 	private String orderDate;
 	private String activateName;
@@ -80,6 +81,13 @@ public class InputVO {
 	}
 	public void setActivateName(String activateName) {
 		this.activateName = activateName;
+	}
+	
+	public String getTrackingNumber() {
+		return trackingNumber;
+	}
+	public void setTrackingNumber(String trackingNumber) {
+		this.trackingNumber = trackingNumber;
 	}
 	@Override
 	public String toString() {

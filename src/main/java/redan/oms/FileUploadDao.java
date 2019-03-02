@@ -65,11 +65,13 @@ public class FileUploadDao extends BaseDAO {
 					receive.setReceAmount(Integer.parseInt(vo.getReceAmount()));
 					receive.setSpecification1(vo.getReceSpic1());
 					receive.setSpecification2(vo.getReceSpic2());
+					receive.setTrackingNumber(vo.getTrackingNumber());
 					
-//					String ordeDateString = vo.getOrderDate();
-//					SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-//					Date OrderDate = sdf.parse(ordeDateString);
-//					receive.setOrderDate(OrderDate);
+					String ordeDateString = vo.getOrderDate();
+					SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+					Date OrderDate = sdf.parse(ordeDateString);
+					receive.setOrderDate(OrderDate);
+					
 					
 //					// if buyer not exists
 					if (!(customerRepository.findByName(vo.getCustomerName()).size() > 0)) {

@@ -38,6 +38,8 @@ public class Receive {
 	private Date orderDate;	
 	@Column
 	private String activateName;
+	@Column
+	private String trackingNumber; 
 	
 	@ManyToMany
 	private Set<Product> prods;
@@ -107,6 +109,13 @@ public class Receive {
 	}
 	public void setActivateName(String activateName) {
 		this.activateName = activateName;
+	}
+	
+	public String getTrackingNumber() {
+		return trackingNumber;
+	}
+	public void setTrackingNumber(String trackingNumber) {
+		this.trackingNumber = trackingNumber;
 	}
 	@Override
 	public String toString() {
