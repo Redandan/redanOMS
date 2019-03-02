@@ -11,6 +11,7 @@ import java.nio.file.Paths;
 import java.util.Date;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import javax.servlet.http.HttpServletResponse;
@@ -89,7 +90,14 @@ public class FileOperationController {
 		String res = "nogood";
 		try {
 			Stream<Path> fileList = Files.list(Paths.get("."));			
-			res = fileList.toArray().toString();
+			List<String> pathList = fileList.map(p->{
+				if (Files.isDirectory(p)) {
+	                return "\\" + p.toString();
+	            }
+	            return p.toString();
+			}) .peek(System.out::println) // write all results in console for debug
+	        .collect(Collectors.toList());
+			res = pathList.toString();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
