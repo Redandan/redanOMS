@@ -12,6 +12,7 @@ public class InputVO {
 	private String logistics;
 	private String customerAddress;
 	private String orderDate;
+	private String activateName;
 	public String getReceiveId() {
 		return receiveId;
 	}
@@ -73,11 +74,19 @@ public class InputVO {
 	public void setOrderDate(String orderDate) {
 		this.orderDate = orderDate;
 	}
+	
+	public String getActivateName() {
+		return activateName;
+	}
+	public void setActivateName(String activateName) {
+		this.activateName = activateName;
+	}
 	@Override
 	public String toString() {
 		return "InputVO [receiveId=" + receiveId + ", customerName=" + customerName + ", customerPhone=" + customerPhone
 				+ ", prodName=" + prodName + ", receSpic1=" + receSpic1 + ", receSpic2=" + receSpic2 + ", receAmount="
-				+ receAmount + ", logistics=" + logistics + ", customerAddress=" + customerAddress + "]";
+				+ receAmount + ", logistics=" + logistics + ", customerAddress=" + customerAddress + ", orderDate="
+				+ orderDate + ", activateName=" + activateName + "]";
 	}
 	
 	

@@ -88,15 +88,13 @@ public class FileOperationController {
 	@RequestMapping(value = "/listFile", method = RequestMethod.GET)
 	public String listFile() {
 		String res = "nogood";
-		try {
-			Stream<Path> fileList = Files.list(Paths.get("."));			
-			List<String> pathList = fileList.map(p->{
+		try {			
+			List<String> pathList =  Files.list(Paths.get(".")).map(p->{
 				if (Files.isDirectory(p)) {
 	                return "\\" + p.toString();
 	            }
 	            return p.toString();
-			}) .peek(System.out::println) // write all results in console for debug
-	        .collect(Collectors.toList());
+			}).collect(Collectors.toList());
 			res = pathList.toString();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
@@ -146,10 +144,9 @@ public class FileOperationController {
 
 	@RequestMapping(value = "/findByCustomerName", method = RequestMethod.POST, produces = MediaType.APPLICATION_OCTET_STREAM_VALUE)
 	public FileSystemResource findByCustomerName(@RequestParam("customerName") String customerName) {
-		List<Customer> customerList = customerRepository.findByName(customerName);
+		List<Customer> customerList = customerRepository.findByName(customerName);		
 		System.out.println(customerName);
 		customerList.forEach(System.out::println);
-
 		return downloadFile(receiveRepository.findByBuyer(customerList.get(0)));
 	}
 
@@ -183,6 +180,13 @@ public class FileOperationController {
 		System.out.println(endDate);
 
 		return downloadFile(receiveRepository.findByOrderDateBetween(startDate, endDate));
+
+	}
+	
+	@RequestMapping(value = "/deleteAll", method = RequestMethod.GET)	
+	public String deleteAll() {
+		receiveRepository.deleteAll();
+		return "done";
 
 	}
 }

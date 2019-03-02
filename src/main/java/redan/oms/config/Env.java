@@ -11,7 +11,7 @@ public class Env {
 	
 	public class RedanConfig{
 //		public static final String filePath = "C://temp//";
-		public static final String filePath = "";
+		public static final String filePath = "";//heroku path
 	}
 	
 	@Bean
