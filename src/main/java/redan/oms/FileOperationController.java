@@ -71,7 +71,8 @@ public class FileOperationController {
 
 		try {
 			byte[] bytes = file.getBytes();
-			Path path = Paths.get(filePath + file.getOriginalFilename());
+//			Path path = Paths.get(filePath + file.getOriginalFilename());
+			Path path = Paths.get(filePath + "savetemp.xlsx");
 			Files.write(path, bytes);
 			uploadService.uploadFileData(filePath + path.getFileName());
 			redirectAttributes.addFlashAttribute("message",
