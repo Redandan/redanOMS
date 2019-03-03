@@ -74,13 +74,10 @@ public class FileOperationController {
 //			Path path = Paths.get(filePath + file.getOriginalFilename());
 			Path path = Paths.get(filePath + "savetemp.xlsx");
 			Files.write(path, bytes);
-			uploadService.uploadFileData(filePath + path.getFileName());
-			redirectAttributes.addFlashAttribute("message",
-					"You successfully uploaded '" + file.getOriginalFilename() + "'");
+			return uploadService.uploadFileData(filePath + path.getFileName());
+
 
 		} catch (IOException e) {
-			redirectAttributes.addFlashAttribute("message",
-					"Failure occured during upload '" + file.getOriginalFilename() + "'");
 			e.printStackTrace();
 		}
 		return "done";

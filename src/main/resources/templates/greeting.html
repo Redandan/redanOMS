@@ -2,6 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
 </head>
 <body>
 	<p th:text="'the temp file path : ' + ${file_path} " />
@@ -10,7 +11,46 @@
     	<a href="/receives">訂單</a>
     	<a href="/customers">客戶</a>
     	<a href="/products">產品</a>
+    	<a href="/deleteAll">刪除全部</a>    	
     </p>
+
+    <table class="table table-hover">
+			<caption>表格標題的順序</caption>
+			<thead>
+				<tr>
+					<th>訂購日期</th>
+					<th>訂單編號</th>
+					<th>收件者</th>
+					<th>收件者手機</th>
+					<th>收件者詳細地址</th>
+					<th>商品名稱</th>
+					<th>規格名稱1</th>
+					<th>規格名稱2</th>
+					<th>結帳金額</th>
+					<th>貨運公司</th>
+					<th>宅配單號</th>
+					<th>活動名稱</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>資料</td><td>資料</td>
+					<td>資料</td><td>資料</td>
+					<td>資料</td><td>資料</td>
+					<td>資料</td><td>資料</td>
+					<td>資料</td><td>資料</td>
+					<td>資料</td><td>資料</td>
+				</tr>
+				<tr>
+					<td>資料</td><td>資料</td>
+					<td>資料</td><td>資料</td>
+					<td>資料</td><td>資料</td>
+					<td>資料</td><td>資料</td>
+					<td>資料</td><td>資料</td>
+					<td>資料</td><td>資料</td>
+				</tr>
+			</tbody>
+		</table>
     
     <form method="POST" action="/upload" enctype="multipart/form-data">
     <input type="file" name="file" /><br/>
@@ -41,6 +81,7 @@
     <input type="date" name="endDate" />
     <input type="submit" value="Submit" />
 	</form>
-	
+	<script src="https://code.jquery.com/jquery.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </body>
 </html>
