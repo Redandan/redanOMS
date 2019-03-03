@@ -26,24 +26,24 @@ public class FileUploadService {
 	Sheet sheet = null;
 
 	public String checkTitle(Row rowTitle) {
-	    for(int i = 0; i < titles.length; i++) {
-	    		    	
-	    	if(rowTitle.getCell(i).toString().equals(titles[i])) {
-//	    		System.out.println("Pass");
-	    	}else {
-//	    		System.out.println(titles[i]);
-//		        System.out.println(rowTitle.getCell(i));
-	    		return "Error title :"+rowTitle.getCell(i).toString()+", it should be :"+titles[i]+" at"+i;
-	    		
-	    	}
-	        
-	    }
-		
+		for (int i = 0; i < titles.length; i++) {
+
+			if (rowTitle.getCell(i).toString().equals(titles[i])) {
+				// System.out.println("Pass");
+			} else {
+				// System.out.println(titles[i]);
+				// System.out.println(rowTitle.getCell(i));
+				return "Error title :" + rowTitle.getCell(i).toString() + ", it should be :" + titles[i] + " at" + i;
+
+			}
+
+		}
+
 		return "OK";
 	}
 
 	public String uploadFileData(String inputFilePath) {
-
+		int size = 0;
 		try {
 
 			workbook = getWorkBook(new File(inputFilePath));
@@ -68,16 +68,15 @@ public class FileUploadService {
 				if (row == null || (row.getCell(2).toString().isEmpty())) {
 					inData = false;
 				} else {
-					
-					if(rowIndex==1) {
+
+					if (rowIndex == 1) {
 						String checkResult = checkTitle(row);
-						if("OK".equals(checkResult)) {
-							//donothing
-						}
-						else {
+						if ("OK".equals(checkResult)) {
+							// donothing
+						} else {
 							return checkTitle(row);
 						}
-						
+
 					}
 					// Read and process each column in row
 					InputVO excelTemplateVO = new InputVO();
@@ -93,19 +92,19 @@ public class FileUploadService {
 						inputList.add(excelTemplateVO);
 					}
 
-					System.out.println(excelTemplateVO);
+					// System.out.println(excelTemplateVO);
 
 				}
 			}
-
+			size = inputList.size();
 			System.out.println("size:" + inputList.size());
-			fileUploadDao.saveFileDataInDB(inputList);
+			 fileUploadDao.saveFileDataInDB(inputList);
 
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
 
-		return "Success";
+		return "Success : " +size + " rows." ;
 	}
 
 	public static Workbook getWorkBook(File fileName) {

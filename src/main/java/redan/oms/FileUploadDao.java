@@ -50,6 +50,8 @@ public class FileUploadDao extends BaseDAO {
 					customer.setAddress(vo.getCustomerAddress());
 					customer.setPhone(vo.getCustomerPhone());
 					customerRepository.save(customer);
+				}else {
+					
 				}
 
 
@@ -101,17 +103,20 @@ public class FileUploadDao extends BaseDAO {
 					HashSet<Product> prodSet = new HashSet<Product>();
 					prodSet.addAll(productRepository.findByName(vo.getProdName()));
 					 receive.setProds(prodSet);
-					System.out.println(vo);
-					System.out.println(productRepository.findByName(vo.getProdName()).toString());
+//					System.out.println(vo);
+//					System.out.println(productRepository.findByName(vo.getProdName()).toString());
 					receiveRepository.save(receive);
 				} else {
 					System.out.println("prod2");
 					// update rece
 					Receive receive = receiveRepository.findByOrigId(Long.parseLong(vo.getReceiveId())).get(0);
 					HashSet<Product> prodSet = new HashSet<Product>();
-					prodSet.addAll(productRepository.findByName(vo.getProdName()));
-					 receive.setProds(prodSet);
+					
+					prodSet.addAll(receive.getProds());
+					prodSet.addAll(productRepository.findByName(vo.getProdName()));		
+					System.out.println(prodSet);
 					receive.setProds(prodSet);
+					receiveRepository.save(receive);
 				}
 
 			}
