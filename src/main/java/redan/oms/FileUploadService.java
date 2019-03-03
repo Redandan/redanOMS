@@ -70,7 +70,14 @@ public class FileUploadService {
 				} else {
 					
 					if(rowIndex==1) {
-						return checkTitle(row);
+						String checkResult = checkTitle(row);
+						if("OK".equals(checkResult)) {
+							//donothing
+						}
+						else {
+							return checkTitle(row);
+						}
+						
 					}
 					// Read and process each column in row
 					InputVO excelTemplateVO = new InputVO();
