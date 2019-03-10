@@ -5,6 +5,7 @@ import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -14,19 +15,20 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "customer")
 public class Customer {
 
 	@Id	
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy=GenerationType.AUTO)   
 	private Long id;
-	@Column
+	
 	private String name;
-	@Column
+
 	private String phone;
-	@Column
+
 	private String address;
-	@ManyToMany
+//	@ManyToMany
+	@OneToMany(targetEntity=Receive.class, fetch=FetchType.EAGER)
+	@JoinColumn
 	private Set<Receive> receives;
 	public Long getId() {
 		return id;

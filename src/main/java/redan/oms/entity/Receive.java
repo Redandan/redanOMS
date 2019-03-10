@@ -18,28 +18,26 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "receives")
 public class Receive {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)  
-	@Column
+	@GeneratedValue(strategy=GenerationType.AUTO)   	
 	private Long id;
-	@Column
+	
 	private Long origId;
-	@Column
+	
 	private String logistics;
-	@Column
+	
 	private String specification1;
-	@Column
+	
 	private String specification2;	
-	@Column
+	
 	private Integer receAmount;
-	@Column
+	
 	private Date orderDate;	
-	@Column
+	
 	private String activateName;
-	@Column
+	
 	private String trackingNumber; 
 	
 	@ManyToMany
