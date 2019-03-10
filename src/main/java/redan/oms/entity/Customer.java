@@ -27,9 +27,9 @@ public class Customer {
 
 	private String address;
 //	@ManyToMany
-	@OneToMany(targetEntity=Receive.class, fetch=FetchType.EAGER)
-	@JoinColumn
-	private Set<Receive> receives;
+//	@OneToMany(targetEntity=Receive.class, fetch=FetchType.EAGER)
+//	@JoinColumn
+//	private Set<Receive> receives;
 	public Long getId() {
 		return id;
 	}
@@ -54,17 +54,17 @@ public class Customer {
 	public void setAddress(String address) {
 		this.address = address;
 	}
-	public Set<Receive> getReceives() {
-		return receives;
-	}
-	public void setReceives(Set<Receive> receives) {
-		this.receives = receives;
-	}
-	@Override
-	public String toString() {
-		return "Customer [id=" + id + ", name=" + name + ", phone=" + phone + ", address=" + address + ", receives="
-				+ receives + "]";
-	}	
+//	public Set<Receive> getReceives() {
+//		return receives;
+//	}
+//	public void setReceives(Set<Receive> receives) {
+//		this.receives = receives;
+//	}
+//	@Override
+//	public String toString() {
+//		return "Customer [id=" + id + ", name=" + name + ", phone=" + phone + ", address=" + address + ", receives="
+//				+ receives + "]";
+//	}	
 	
 	
 }
