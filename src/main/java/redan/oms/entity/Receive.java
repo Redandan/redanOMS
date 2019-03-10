@@ -6,6 +6,7 @@ import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -42,8 +43,11 @@ public class Receive {
 	private String trackingNumber; 
 	
 	@ManyToMany
+	@JoinColumn(nullable = false)
 	private Set<Product> prods;
-	@ManyToOne
+	
+	@ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(nullable = false)
 	private Customer buyer;
 	public Long getId() {
 		return id;
